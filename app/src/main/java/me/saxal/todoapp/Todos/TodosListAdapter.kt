@@ -1,9 +1,9 @@
 package me.saxal.todoapp.Todos
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import me.saxal.todoapp.R
 
@@ -11,21 +11,44 @@ import me.saxal.todoapp.R
 class TodosListAdapter(private val myDataset: Array<String>) :
     RecyclerView.Adapter<TodosListAdapter.MyViewHolder>() {
 
+    private val TYPE_HEADER = 0
+    private val TYPE_ITEM = 1
+
+    override fun getItemViewType(position: Int): Int {
+        return when(position) {
+            0 -> TYPE_HEADER
+            else -> TYPE_ITEM
+        }
+    }
+
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just a string in this case that is shown in a TextView.
     class MyViewHolder(val textView: LinearLayout) : RecyclerView.ViewHolder(textView)
 
-
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): TodosListAdapter.MyViewHolder {
+
+        if(viewType == TYPE_HEADER) {
+            val textView = LayoutInflater.from(parent.context)
+                .inflate(R.layout.cell_todo_header, parent, false) as LinearLayout
+            // set the view's size, margins, paddings and layout parameters
+            return MyViewHolder(textView)
+        } else {
+            val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.cell_todo, parent, false) as LinearLayout
+            // set the view's size, margins, paddings and layout parameters
+            return MyViewHolder(view)
+        }
+
+
         // create a new view
-        val textView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.cell_todo, parent, false) as LinearLayout
-        // set the view's size, margins, paddings and layout parameters
-        return MyViewHolder(textView)
+//        val textView = LayoutInflater.from(parent.context)
+//            .inflate(R.layout.cell_todo, parent, false) as LinearLayout
+//        // set the view's size, margins, paddings and layout parameters
+//        return MyViewHolder(textView)
     }
 
     // Replace the contents of a view (invoked by the layout manager)
