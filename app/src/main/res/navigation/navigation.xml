@@ -3,6 +3,6 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/navigation" app:startDestination="@id/todosFragment">
 
-    <fragment android:id="@+id/todosFragment" android:name="me.saxal.todoapp.Todos.TodosFragment"
+    <fragment android:id="@+id/todosFragment" android:name="me.saxal.todoapp.todos.TodosFragment"
               android:label="TodosFragment"/>
 </navigation>

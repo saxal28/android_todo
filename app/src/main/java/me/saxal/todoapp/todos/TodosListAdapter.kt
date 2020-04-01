@@ -1,24 +1,28 @@
-package me.saxal.todoapp.Todos
+package me.saxal.todoapp.todos
 
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import me.saxal.todoapp.R
 
+private const val TYPE_HEADER = 0
+private const val TYPE_ITEM = 1
 
-class TodosListAdapter(private val myDataset: Array<String>) :
+class TodosListAdapter(private val myDataset: List<TodoModel>) :
     RecyclerView.Adapter<TodosListAdapter.MyViewHolder>() {
 
-    private val TYPE_HEADER = 0
-    private val TYPE_ITEM = 1
-
     override fun getItemViewType(position: Int): Int {
+        Log.i("VIEWMODEL", position.toString())
         return when(position) {
             0 -> TYPE_HEADER
             else -> TYPE_ITEM
         }
+    }
+
+    init {
+        Log.i("VIEWMODEL", myDataset.toString())
     }
 
     // Provide a reference to the views for each data item
@@ -29,7 +33,7 @@ class TodosListAdapter(private val myDataset: Array<String>) :
 
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): TodosListAdapter.MyViewHolder {
+                                    viewType: Int): MyViewHolder {
 
         if(viewType == TYPE_HEADER) {
             val textView = LayoutInflater.from(parent.context)
@@ -42,13 +46,6 @@ class TodosListAdapter(private val myDataset: Array<String>) :
             // set the view's size, margins, paddings and layout parameters
             return MyViewHolder(view)
         }
-
-
-        // create a new view
-//        val textView = LayoutInflater.from(parent.context)
-//            .inflate(R.layout.cell_todo, parent, false) as LinearLayout
-//        // set the view's size, margins, paddings and layout parameters
-//        return MyViewHolder(textView)
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -59,5 +56,5 @@ class TodosListAdapter(private val myDataset: Array<String>) :
     }
 
     // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = myDataset.size
+    override fun getItemCount() = myDataset.size + 1
 }
