@@ -4,5 +4,14 @@
             android:id="@+id/navigation" app:startDestination="@id/todosFragment">
 
     <fragment android:id="@+id/todosFragment" android:name="me.saxal.todoapp.todos.TodosFragment"
-              android:label="TodosFragment"/>
+              android:label="TodosFragment">
+        <action
+                android:id="@+id/action_todosFragment_to_createTodoFragment"
+                app:destination="@id/createTodoFragment"
+                app:popUpTo="@id/todosFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/createTodoFragment"
+            android:name="me.saxal.todoapp.createTodo.CreateTodoFragment"
+            android:label="CreateTodoFragment" />
 </navigation>

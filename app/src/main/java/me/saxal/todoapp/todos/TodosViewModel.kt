@@ -1,5 +1,7 @@
 package me.saxal.todoapp.todos
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class TodosViewModel : ViewModel() {
@@ -11,21 +13,22 @@ class TodosViewModel : ViewModel() {
         TodoModel(name = "Help the Needy", description = "Once saved enough, try helping the one's in need.", totalToComplete = 1)
     )
 
-    val test: String = "Hello!"
     val goalsString = "${todos.count()} Goals"
 
-//    private val users: MutableLiveData<List<User>> by lazy {
-//        MutableLiveData().also {
-//            loadUsers()
-//        }
-//    }
-//
-//    fun getUsers(): LiveData<List<User>> {
-//        return users
-//    }
-//
-//    private fun loadUsers() {
-//        // Do an asynchronous operation to fetch users.
-//    }
+    // ======================================
+    // navigate to CreateTodo Screen
+    // ======================================
+
+    private val _navigateToCreate: MutableLiveData<Boolean> = MutableLiveData(false)
+    val navigateToCreate:LiveData<Boolean>
+        get() = _navigateToCreate
+
+    fun pressNavigateToCreate() {
+        _navigateToCreate.value = true
+    }
+
+    fun doneNavigatingToCreate() {
+        _navigateToCreate.value = false
+    }
 
 }
