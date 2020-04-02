@@ -1,7 +1,6 @@
 package me.saxal.todoapp.todos
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,9 +25,6 @@ class TodosFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_todos, container, false)
-
-        // VIEWMODEL BINDING!
         val binding: FragmentTodosBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_todos, container, false)
         val model: TodosViewModel = ViewModelProviders.of(activity!!).get(TodosViewModel::class.java)
         binding.lifecycleOwner = activity
@@ -37,6 +33,7 @@ class TodosFragment: Fragment() {
         viewManager = LinearLayoutManager(this.context)
         viewAdapter = TodosListAdapter(model.todos)
 
+        // inflate recycler view
         recyclerView = binding.root.findViewById<RecyclerView>(R.id.todos_recycler).apply {
             setHasFixedSize(true)
             layoutManager = viewManager
