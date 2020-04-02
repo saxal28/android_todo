@@ -11,7 +11,7 @@ abstract class BaseViewHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemV
     abstract fun bind(item: T)
 }
 
-class TodosListAdapter(private val myDataset: List<TodoModel>) :
+class TodosListAdapter(private val myDataset: List<TodoModel>, private val viewModel: TodosViewModel) :
     RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     companion object {
@@ -27,9 +27,9 @@ class TodosListAdapter(private val myDataset: List<TodoModel>) :
     }
 
     inner class HeaderViewHolder(private val binding: CellTodoHeaderBinding) :
-        BaseViewHolder<TodoModel>(binding.root) {
-        override fun bind(item: TodoModel) {
-            binding.name = "hi"
+        BaseViewHolder<TodosViewModel>(binding.root) {
+        override fun bind(item: TodosViewModel) {
+            binding.viewModel = item
         }
     }
 
@@ -65,7 +65,7 @@ class TodosListAdapter(private val myDataset: List<TodoModel>) :
         val element = if (position == 0) myDataset[0] else myDataset[position - 1];
 
         when (holder) {
-            is HeaderViewHolder -> holder.bind(element)
+            is HeaderViewHolder -> holder.bind(viewModel)
             is TodoViewHolder -> holder.bind(element)
         }
     }

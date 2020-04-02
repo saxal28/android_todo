@@ -31,7 +31,7 @@ class TodosFragment: Fragment() {
         binding.viewModel = model
 
         viewManager = LinearLayoutManager(this.context)
-        viewAdapter = TodosListAdapter(model.todos)
+        viewAdapter = TodosListAdapter(model.todos, viewModel = model)
 
         // inflate recycler view
         recyclerView = binding.root.findViewById<RecyclerView>(R.id.todos_recycler).apply {

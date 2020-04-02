@@ -12,6 +12,7 @@ class TodosViewModel : ViewModel() {
     )
 
     val test: String = "Hello!"
+    val goalsString = "${todos.count()} Goals"
 
 //    private val users: MutableLiveData<List<User>> by lazy {
 //        MutableLiveData().also {
